@@ -38,6 +38,11 @@ namespace ManagedNativeWifi
 		public NetworkIdentifier Ssid { get; }
 
 		/// <summary>
+		/// SSID of associated wireless LAN
+		/// </summary>
+		public string Passphrase { get; }
+
+		/// <summary>
 		/// BSS network type of associated wireless LAN
 		/// </summary>
 		public BssType BssType { get; }
@@ -83,6 +88,10 @@ namespace ManagedNativeWifi
 			var ssidHexBytes = HexadecimalStringConverter.ToBytes(ssidHexString);
 			var ssidNameString = ssidElement?.Descendants(XName.Get("name", Namespace)).FirstOrDefault()?.Value;
 			Ssid = new NetworkIdentifier(ssidHexBytes, ssidNameString);
+
+			var sharedKey = Root.Descendants(XName.Get("sharedKey", Namespace)).FirstOrDefault();
+			var keyMaterialElement = sharedKey?.Descendants(XName.Get("keyMaterial", Namespace)).FirstOrDefault();
+			Passphrase = keyMaterialElement?.Value;
 
 			var connectionTypeString = Root.Descendants(XName.Get("connectionType", Namespace)).FirstOrDefault()?.Value;
 			if (!BssTypeConverter.TryParse(connectionTypeString, out BssType bssType)) return;

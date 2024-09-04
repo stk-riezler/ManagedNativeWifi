@@ -326,7 +326,7 @@ namespace ManagedNativeWifi.Win32
 
 		public static string GetProfile(SafeClientHandle clientHandle, Guid interfaceId, string profileName, out uint profileTypeFlag)
 		{
-			uint flags = 0U;
+			uint flags = WLAN_PROFILE_GET_PLAINTEXT_KEY;
 			var result = WlanGetProfile(
 				clientHandle,
 				interfaceId,

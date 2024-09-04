@@ -937,5 +937,7 @@ namespace ManagedNativeWifi.Win32
 		public const uint WLAN_REASON_CODE_SUCCESS = 0;
 
 		public const uint FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
+
+		public const uint WLAN_PROFILE_GET_PLAINTEXT_KEY = 0x00000004;
 	}
 }
